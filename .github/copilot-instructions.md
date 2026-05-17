@@ -18,8 +18,8 @@ A custom benchmarking agent (`benchmark/`) for measuring the time and token usag
 | `benchmark.agent.BenchmarkAgent` | Wraps an OpenAI-compatible client; records wall-clock timing around each `chat.completions.create` call and returns a `BenchmarkResult` |
 | `benchmark.metrics.TimingMetrics` | Stores `start_time` / `end_time` (from `time.perf_counter`) and exposes `elapsed_seconds` / `elapsed_ms` |
 | `benchmark.metrics.TokenMetrics` | Stores `prompt_tokens` / `completion_tokens` and `total_tokens`; constructed via `TokenMetrics.from_response(response)` which supports both dict-style and object-style API responses |
-| `benchmark.metrics.BenchmarkResult` | Combines `TimingMetrics`, `TokenMetrics`, prompt, model, and response text into a serialisable result; `result.to_dict()` returns a flat dictionary |
-| `benchmark.reporter.BenchmarkReporter` | Formats results as JSON (`.to_json`), JSON-Lines (`.to_json_lines`), CSV (`.to_csv`), plain text (`.to_text`), or aggregate summary statistics (`.summarise`) |
+| `benchmark.metrics.BenchmarkResult` | Combines `TimingMetrics`, `TokenMetrics`, prompt, model, and response text into a serializable result; `result.to_dict()` returns a flat dictionary |
+| `benchmark.reporter.BenchmarkReporter` | Formats results as JSON (`.to_json`), JSON-Lines (`.to_json_lines`), CSV (`.to_csv`), plain text (`.to_text`), or aggregate summary statistics (`.summarize`) |
 
 ### Running the benchmark tests
 
