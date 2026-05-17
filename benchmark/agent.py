@@ -79,7 +79,7 @@ class BenchmarkAgent:
         if isinstance(response, dict):
             choices = response.get("choices", [])
         else:
-            choices = getattr(response, "choices", []) or []
+            choices = getattr(response, "choices", [])
         response_text = ""
         if choices:
             first = choices[0]
