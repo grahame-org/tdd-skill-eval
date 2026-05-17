@@ -1,0 +1,16 @@
+{
+  "eval_id": 5,
+  "eval_name": "palindrome",
+  "prompt": "Use TDD to implement a function that checks whether a string is a palindrome (reads the same forwards and backwards, ignoring case and non-alphanumeric characters).",
+  "assertions": [
+    "A test list or plan is described before implementation starts",
+    "Tests cover: empty string, single character, simple palindrome, simple non-palindrome, mixed-case palindrome, palindrome with spaces or punctuation",
+    "All tests pass with the final implementation",
+    "The refactor phase removes any duplication introduced while making tests pass",
+    "The agent runs the test suite after each Red and Green phase",
+    "Forcing tests drive each new transformation step; the agent does not jump directly to the complete normalisation logic (e.g. s == s[::-1]) without intermediate tests forcing each addition",
+    "Triangulation tests (additional examples of the same rule) are added after the corresponding forcing test is green, not batched into the initial test list",
+    "Test names describe the behaviour being verified (e.g. 'single_character_is_a_palindrome', 'ignores_case_when_comparing')",
+    "The implementation handles the full normalisation (case folding and non-alphanumeric stripping) only once tests require it — not speculatively"
+  ]
+}

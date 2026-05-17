@@ -1,0 +1,37 @@
+{
+  "expectations": [
+    {
+      "text": "A test for the combined vip=True and code='SAVE10' case is written and confirmed to fail before any fix is applied",
+      "passed": true,
+      "evidence": "Transcript Step 1 shows test_vip_and_save10_code_discount_not_stacked written against the buggy implementation (two separate if blocks). The test run output explicitly shows: 'FAILED test_discount.py::test_vip_and_save10_code_discount_not_stacked - AssertionError: Expected 90.0 (10% off applied once), but got 81.0.' This failure is documented before any fix was applied."
+    },
+    {
+      "text": "The fix is minimal — only the double-discount logic is changed",
+      "passed": true,
+      "evidence": "The fix changed exactly two sequential `if` blocks into a single `if vip or code == 'SAVE10':` condition. The function signature, return value, rounding, and all other behaviour are unchanged. discount.py is 6 lines total — nothing unrelated was touched."
+    },
+    {
+      "text": "All tests pass after the fix",
+      "passed": true,
+      "evidence": "Both the transcript (Step 2) and the live test run confirm '5 passed in 0.01s': test_no_discount, test_vip_discount_only, test_save10_code_only, test_no_vip_wrong_code, and test_vip_and_save10_code_discount_not_stacked all PASSED."
+    },
+    {
+      "text": "No unrelated behaviour was changed alongside the fix",
+      "passed": true,
+      "evidence": "The final discount.py only modifies the conditional logic for applying the 10% discount (two ifs → one if/or). The function signature, docstring update (adding a clarification sentence), rounding, and return are all consistent with the original. The four pre-existing passing tests (no_discount, vip_only, save10_only, wrong_code) continue to pass, confirming no unrelated behaviour was altered."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "claims": [],
+  "eval_feedback": {
+    "suggestions": [
+      "The transcript is thorough and well-structured. One minor improvement: the outputs directory only contains the final (fixed) files, so the RED-phase evidence relies solely on the transcript. Preserving a snapshot of the buggy discount.py alongside the test run output as a separate artifact would make grading more robust without relying on the transcript alone."
+    ],
+    "overall": "Perfect TDD execution. The failing test was written first against the buggy implementation and confirmed to fail (81.0 vs 90.0). The fix was minimal — a single-line conditional change — and all 5 tests pass afterwards with no unrelated changes."
+  }
+}

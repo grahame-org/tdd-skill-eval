@@ -1,0 +1,65 @@
+{
+  "expectations": [
+    {
+      "text": "A test for is_empty on a new stack appears before any Stack implementation",
+      "passed": true,
+      "evidence": "Transcript Cycle 1 states all 13 tests were written before any implementation existed. test_new_stack_is_empty is the very first test in test_stack.py. The stack.py implementation was only created in Cycle 2."
+    },
+    {
+      "text": "Tests cover all four methods: push, pop, peek, is_empty",
+      "passed": true,
+      "evidence": "test_stack.py contains TestStackIsEmpty, TestStackPush, TestStackPop, and TestStackPeek classes, covering all four methods with 3–5 tests each."
+    },
+    {
+      "text": "A test verifies that pop on an empty stack raises IndexError",
+      "passed": true,
+      "evidence": "test_pop_empty_stack_raises_index_error uses pytest.raises(IndexError) on an empty Stack(). Additionally test_pop_until_empty_then_raises covers the same error after exhausting the stack."
+    },
+    {
+      "text": "All tests pass with the final implementation",
+      "passed": true,
+      "evidence": "Transcript reports '13 passed in 0.01s' and the coverage table shows 13/13 PASSED for all tests."
+    },
+    {
+      "text": "Tests were added one at a time — no large batches of tests written before the code caught up",
+      "passed": false,
+      "evidence": "Transcript Cycle 1 explicitly states: 'Written test_stack.py with 13 tests covering all four methods before any implementation exists.' All 13 tests were written in a single batch before any implementation, directly violating this assertion."
+    },
+    {
+      "text": "A test verifies the behaviour of peek on an empty stack (raises an error or returns a sentinel value)",
+      "passed": false,
+      "evidence": "TestStackPeek contains only test_peek_returns_top_without_removing and test_peek_does_not_change_size — neither tests peek on an empty stack. The implementation also has no guard (peek on empty returns _items[-1] which raises IndexError, but this is untested)."
+    },
+    {
+      "text": "Test names are intention-revealing and describe behaviour (e.g. 'new_stack_is_empty', 'pop_from_empty_stack_raises_error')",
+      "passed": true,
+      "evidence": "All test names clearly describe behaviour: test_new_stack_is_empty, test_pop_empty_stack_raises_index_error, test_pop_lifo_order, test_peek_returns_top_without_removing, etc."
+    },
+    {
+      "text": "The Stack class is not fully scaffolded upfront — methods and attributes are introduced one at a time as tests demand them",
+      "passed": false,
+      "evidence": "In Cycle 2, the complete Stack class with all four methods (__init__, push, pop, peek, is_empty) was introduced in one go. No incremental introduction of methods as individual tests demanded them."
+    },
+    {
+      "text": "The refactor phase is explicitly considered after each green cycle, and any duplication in the implementation is removed",
+      "passed": false,
+      "evidence": "There was only a single red-green-refactor cycle (not one per test or small batch). The refactor step was acknowledged ('No refactoring needed') but only once after all 13 tests passed simultaneously, rather than after each incremental green cycle."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 4,
+    "total": 9,
+    "pass_rate": 0.56
+  },
+  "claims": [],
+  "eval_feedback": {
+    "suggestions": [
+      "The most significant TDD violation is writing all 13 tests before any implementation. True TDD requires one test at a time (Red → Green → Refactor per test or small logical group).",
+      "Add a test for peek on an empty stack to fully specify edge-case behaviour.",
+      "The Stack implementation should be grown incrementally — e.g., introduce is_empty first, then push, then pop, then peek — as each test demands it.",
+      "The refactor phase should be visited after each individual green cycle, not just once at the end."
+    ],
+    "overall": "The submission demonstrates good test naming, full method coverage, and a correct final implementation, but fundamentally violates TDD discipline by batch-writing all 13 tests before any code exists and implementing the full Stack class in a single step. The refactor phase is only nominally addressed. Missing a test for peek on an empty stack is also a gap in coverage."
+  }
+}

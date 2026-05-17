@@ -1,0 +1,16 @@
+{
+  "eval_id": 2,
+  "eval_name": "stack",
+  "prompt": "Use TDD to implement a Stack class in Python with push, pop, peek, and is_empty methods. pop on an empty stack should raise an IndexError.",
+  "assertions": [
+    "A test for is_empty on a new stack appears before any Stack implementation",
+    "Tests cover all four methods: push, pop, peek, is_empty",
+    "A test verifies that pop on an empty stack raises IndexError",
+    "All tests pass with the final implementation",
+    "Tests were added one at a time — no large batches of tests written before the code caught up",
+    "A test verifies the behaviour of peek on an empty stack (raises an error or returns a sentinel value)",
+    "Test names are intention-revealing and describe behaviour (e.g. 'new_stack_is_empty', 'pop_from_empty_stack_raises_error')",
+    "The Stack class is not fully scaffolded upfront — methods and attributes are introduced one at a time as tests demand them",
+    "The refactor phase is explicitly considered after each green cycle, and any duplication in the implementation is removed"
+  ]
+}
