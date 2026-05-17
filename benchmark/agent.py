@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import time
-from typing import Any, Callable, Optional
+from typing import Any, Optional
 
 from benchmark.metrics import BenchmarkResult, TimingMetrics, TokenMetrics
 
@@ -76,7 +76,10 @@ class BenchmarkAgent:
         timing = TimingMetrics(start_time=start, end_time=end)
         tokens = TokenMetrics.from_response(response)
 
-        choices = getattr(response, "choices", None) or response.get("choices", [])
+        if isinstance(response, dict):
+            choices = response.get("choices", [])
+        else:
+            choices = getattr(response, "choices", []) or []
         response_text = ""
         if choices:
             first = choices[0]

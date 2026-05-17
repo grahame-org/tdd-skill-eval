@@ -5,7 +5,7 @@ from __future__ import annotations
 import csv
 import io
 import json
-from typing import Iterable, List, Optional
+from typing import Iterable, List
 
 from benchmark.metrics import BenchmarkResult
 
@@ -65,6 +65,10 @@ class BenchmarkReporter:
         Returns a dict with keys: ``count``, ``total_tokens_mean``,
         ``elapsed_ms_mean``, ``prompt_tokens_total``,
         ``completion_tokens_total``.
+
+        When *results* is empty, ``count`` is ``0`` and all mean/total
+        values are reported as ``0.0`` or ``0`` rather than being omitted
+        or raising an error.
         """
         if not results:
             return {
