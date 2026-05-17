@@ -29,3 +29,6 @@ jobs:
 
       - name: Install benchmark dev dependencies
         run: pip install -r requirements-dev.txt
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
