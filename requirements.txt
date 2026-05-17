@@ -1,0 +1,3 @@
+# No runtime dependencies – the benchmark package uses only the standard library.
+# An OpenAI-compatible client (e.g. openai>=1.0) must be installed separately
+# when using BenchmarkAgent against a live API.
