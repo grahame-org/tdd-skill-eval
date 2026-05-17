@@ -24,31 +24,36 @@ from typing import Any
 
 GITHUB_MODELS_BASE_URL = "https://models.inference.ai.azure.com"
 
+# Default endpoint: GitHub Copilot API — accessible from the Copilot coding-agent
+# sandbox (and any environment with a GITHUB_TOKEN that has Copilot access).
+# The GitHub Models endpoint (GITHUB_MODELS_BASE_URL) requires a personal-access
+# token with GitHub Models scope and is not reachable from the agent sandbox.
+GITHUB_COPILOT_BASE_URL = "https://api.individual.githubcopilot.com"
+
 
 class CopilotClient:
-    """Minimal OpenAI-compatible client backed by the GitHub Models endpoint.
+    """Minimal OpenAI-compatible client backed by the GitHub Copilot API.
 
     The client exposes the same ``client.chat.completions.create(model, messages,
     **kwargs)`` interface that :class:`~benchmark.agent.BenchmarkAgent` expects,
     so it can be passed directly::
 
-        agent = BenchmarkAgent(CopilotClient(token), model="gpt-4o")
+        agent = BenchmarkAgent(CopilotClient(token), model="gpt-4o-mini")
 
     Parameters
     ----------
     github_token:
-        A GitHub personal-access token (or the ``GITHUB_TOKEN`` secret
-        available in GitHub Actions / Copilot coding-agent environments)
-        that has permission to use GitHub Models.
+        A GitHub token (``GITHUB_TOKEN`` or ``GITHUB_COPILOT_API_TOKEN``)
+        available in GitHub Actions / Copilot coding-agent environments.
     base_url:
-        Override the default GitHub Models inference endpoint.  Useful for
-        testing or when pointing at a compatible self-hosted endpoint.
+        Override the default Copilot API endpoint.  Useful for testing or
+        when pointing at a compatible self-hosted endpoint.
     """
 
     def __init__(
         self,
         github_token: str,
-        base_url: str = GITHUB_MODELS_BASE_URL,
+        base_url: str = GITHUB_COPILOT_BASE_URL,
     ) -> None:
         if not github_token:
             raise ValueError("github_token must not be empty.")

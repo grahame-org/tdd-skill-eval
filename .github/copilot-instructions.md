@@ -16,7 +16,7 @@ A custom benchmarking agent (`benchmark/`) for measuring the time and token usag
 | Module | Description |
 |--------|-------------|
 | `benchmark.agent.BenchmarkAgent` | Wraps an OpenAI-compatible client; records wall-clock timing around each `chat.completions.create` call and returns a `BenchmarkResult` |
-| `benchmark.copilot_client.CopilotClient` | Minimal OpenAI-compatible client backed by the **GitHub Models** inference endpoint (`https://models.inference.ai.azure.com`). Authenticates with a `GITHUB_TOKEN`; no third-party libraries required. Pass directly to `BenchmarkAgent`. |
+| `benchmark.copilot_client.CopilotClient` | Minimal OpenAI-compatible client backed by the **GitHub Copilot API** (`https://api.individual.githubcopilot.com`). Authenticates with a `GITHUB_TOKEN`; no third-party libraries required. Pass directly to `BenchmarkAgent`. |
 | `benchmark.metrics.TimingMetrics` | Stores `start_time` / `end_time` (from `time.perf_counter`) and exposes `elapsed_seconds` / `elapsed_ms` |
 | `benchmark.metrics.TokenMetrics` | Stores `prompt_tokens` / `completion_tokens` and `total_tokens`; constructed via `TokenMetrics.from_response(response)` which supports both dict-style and object-style API responses |
 | `benchmark.metrics.BenchmarkResult` | Combines `TimingMetrics`, `TokenMetrics`, prompt, model, and response text into a serializable result; `result.to_dict()` returns a flat dictionary |
@@ -31,7 +31,7 @@ The `GITHUB_TOKEN` secret is available in the Copilot coding-agent environment a
 python -m benchmark "Explain the halting problem in one sentence."
 
 # JSON output, custom model
-python -m benchmark "What is 2+2?" --model gpt-4o --format json
+python -m benchmark "What is 2+2?" --model gpt-4.1 --format json
 ```
 
 Or call the API from Python:
@@ -42,12 +42,12 @@ from benchmark import BenchmarkAgent, CopilotClient
 from benchmark.reporter import BenchmarkReporter
 
 client  = CopilotClient(github_token=os.environ["GITHUB_TOKEN"])
-agent   = BenchmarkAgent(client, model="gpt-4o")
+agent   = BenchmarkAgent(client, model="gpt-4o-mini")
 result  = agent.run("Explain the halting problem in one sentence.")
 
 reporter = BenchmarkReporter()
 print(reporter.to_text(result))
-# Model         : gpt-4o
+# Model         : gpt-4o-mini
 # Prompt tokens : 12
 # Completion    : 30
 # Total tokens  : 42

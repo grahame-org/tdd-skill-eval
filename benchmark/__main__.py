@@ -39,8 +39,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("prompt", help="Prompt text to evaluate.")
     parser.add_argument(
         "--model",
-        default="gpt-4o",
-        help="Model name to use (default: gpt-4o).",
+        default="gpt-4o-mini",
+        help="Model name to use (default: gpt-4o-mini).",
     )
     parser.add_argument(
         "--format",

@@ -9,7 +9,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from benchmark.copilot_client import GITHUB_MODELS_BASE_URL, CopilotClient
+from benchmark.copilot_client import GITHUB_COPILOT_BASE_URL, GITHUB_MODELS_BASE_URL, CopilotClient
 
 
 # ---------------------------------------------------------------------------
@@ -52,7 +52,7 @@ def _mock_urlopen(body: bytes, status: int = 200):
 class TestCopilotClientConstruction:
     def test_default_base_url(self):
         client = CopilotClient("token123")
-        assert client._base_url == GITHUB_MODELS_BASE_URL.rstrip("/")
+        assert client._base_url == GITHUB_COPILOT_BASE_URL.rstrip("/")
 
     def test_custom_base_url(self):
         client = CopilotClient("token123", base_url="https://example.com/")
@@ -321,7 +321,7 @@ class TestCLI:
 
         assert code == 1
 
-    def test_default_model_is_gpt4o(self, monkeypatch):
+    def test_default_model_is_gpt4o_mini(self, monkeypatch):
         from benchmark.__main__ import main
 
         monkeypatch.setenv("GITHUB_TOKEN", "fake-token")
@@ -331,7 +331,7 @@ class TestCLI:
             main(["hello"])
 
         sent = json.loads(mock_open.call_args[0][0].data)
-        assert sent["model"] == "gpt-4o"
+        assert sent["model"] == "gpt-4o-mini"
 
     def test_model_override(self, monkeypatch):
         from benchmark.__main__ import main
