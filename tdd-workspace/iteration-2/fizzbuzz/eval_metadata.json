@@ -1,0 +1,16 @@
+{
+  "eval_id": 1,
+  "eval_name": "fizzbuzz",
+  "prompt": "Use TDD to implement a FizzBuzz function in Python. It should return 'Fizz' for multiples of 3, 'Buzz' for multiples of 5, 'FizzBuzz' for multiples of both, and the number as a string otherwise.",
+  "assertions": [
+    "A test file exists and contains at least 4 tests covering plain number, multiple of 3, multiple of 5, and multiple of 15",
+    "The production code file exists and all tests pass",
+    "The agent described or produced a test list before writing any code",
+    "The first test written is for a plain number (not the full FizzBuzz case), showing simplest-first ordering",
+    "No production code exists that is not covered by at least one test",
+    "Forcing tests (plain number returning itself, first Fizz, first Buzz, first FizzBuzz) appear before any triangulation tests (e.g. Fizz(6), Buzz(10), FizzBuzz(30))",
+    "Test names describe the behaviour being verified rather than just the input value (e.g. 'returns_fizz_for_multiple_of_3' rather than 'test_3')",
+    "The implementation evolves through at least two distinct transformation steps (e.g. constant return before conditional logic is introduced)",
+    "The refactor phase is explicitly considered; opportunities such as combining the modulo checks or removing duplication are noted or applied"
+  ]
+}
