@@ -1,0 +1,492 @@
+{
+  "metadata": {
+    "skill_name": "tdd",
+    "skill_path": "grahame-org/tdd-skill",
+    "executor_model": "claude-sonnet-4-5",
+    "analyzer_model": "claude-sonnet-4-5",
+    "timestamp": "2026-05-17T14:12:04Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test file exists and contains at least 4 tests covering plain number, multiple of 3, multiple of 5, and multiple of 15",
+          "passed": true,
+          "evidence": "test_fizzbuzz.py exists with 8 tests: plain numbers (1, 2), multiples of 3 (3, 6), multiples of 5 (5, 10), and multiples of 15 (15, 30). All four required cases are covered."
+        },
+        {
+          "text": "The production code file exists and all tests pass",
+          "passed": true,
+          "evidence": "fizzbuzz.py exists and all 8 tests pass: '8 passed in 0.02s' confirmed by running pytest."
+        },
+        {
+          "text": "The agent described or produced a test list before writing any code",
+          "passed": true,
+          "evidence": "Transcript '## Step 0 \u2014 Test List' section lists all 8 test cases before any production code or tests were written. The test file also contains the TODO test list as comments at the top."
+        },
+        {
+          "text": "The first test written is for a plain number (not the full FizzBuzz case), showing simplest-first ordering",
+          "passed": true,
+          "evidence": "Cycle 1 shows the first test written is 'test_returns_number_as_string_for_1' asserting fizzbuzz(1) == '1', which is a plain non-multiple number, not a Fizz/Buzz/FizzBuzz case."
+        },
+        {
+          "text": "No production code exists that is not covered by at least one test",
+          "passed": true,
+          "evidence": "fizzbuzz.py has 4 branches: n%15==0 (covered by tests for 15, 30), n%3==0 (covered by tests for 3, 6), n%5==0 (covered by tests for 5, 10), and default str(n) (covered by tests for 1, 2). Every branch is exercised."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "baseline",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test file exists and contains at least 4 tests covering plain number, multiple of 3, multiple of 5, and multiple of 15",
+          "passed": true,
+          "evidence": "test_fizzbuzz.py exists with 9 tests: test_returns_number_as_string (plain number), test_returns_fizz_for_multiple_of_3, test_returns_buzz_for_multiple_of_5, test_returns_fizzbuzz_for_multiple_of_15, plus 5 additional confirming tests."
+        },
+        {
+          "text": "The production code file exists and all tests pass",
+          "passed": true,
+          "evidence": "fizzbuzz.py exists with a correct 4-branch implementation. All 9 tests pass: '9 passed in 0.01s' confirmed by running pytest."
+        },
+        {
+          "text": "The agent described or produced a test list before writing any code",
+          "passed": true,
+          "evidence": "The transcript contains a 'Test Cases Written' table listing all 9 tests with rationale before the implementation section. The transcript states 'Tests first \u2014 all tests written in test_fizzbuzz.py before any implementation'."
+        },
+        {
+          "text": "The first test written is for a plain number (not the full FizzBuzz case), showing simplest-first ordering",
+          "passed": true,
+          "evidence": "The first test in test_fizzbuzz.py is test_returns_number_as_string (fizzbuzz(1) == '1'), a plain number case. It appears first in the file and first in the transcript's test list table."
+        },
+        {
+          "text": "No production code exists that is not covered by at least one test",
+          "passed": true,
+          "evidence": "fizzbuzz.py has 4 branches: n%15==0 (covered by test_returns_fizzbuzz_for_multiple_of_15), n%3==0 (covered by test_returns_fizz_for_multiple_of_3), n%5==0 (covered by test_returns_buzz_for_multiple_of_5), and str(n) fallback (covered by test_returns_number_as_string). Every line of production code is exercised."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test for is_empty on a new stack appears before any Stack implementation",
+          "passed": true,
+          "evidence": "Cycle 1 RED phase shows test_new_stack_is_empty written first, producing 'ModuleNotFoundError: No module named stack' \u2014 confirming no Stack implementation existed yet. The minimal stub (returning constant True) was only added after the failing test was confirmed."
+        },
+        {
+          "text": "Tests cover all four methods: push, pop, peek, is_empty",
+          "passed": true,
+          "evidence": "test_stack.py contains tests exercising all four methods: is_empty (test_new_stack_is_empty, test_is_not_empty_after_push), push (test_is_not_empty_after_push, test_pop_returns_pushed_value, test_lifo_order), pop (test_pop_returns_pushed_value, test_pop_empty_stack_raises, test_lifo_order), peek (test_peek_returns_top_without_removing, test_peek_does_not_remove_element)."
+        },
+        {
+          "text": "A test verifies that pop on an empty stack raises IndexError",
+          "passed": true,
+          "evidence": "test_pop_empty_stack_raises uses 'with pytest.raises(IndexError): s.pop()' on a fresh empty Stack. Confirmed passing in final test run."
+        },
+        {
+          "text": "All tests pass with the final implementation",
+          "passed": true,
+          "evidence": "Running 'python -m pytest test_stack.py -v' collected 7 items and reported '7 passed in 0.02s' with exit code 0."
+        },
+        {
+          "text": "Tests were added one at a time \u2014 no large batches of tests written before the code caught up",
+          "passed": true,
+          "evidence": "Transcript shows 7 strictly sequential cycles, each adding exactly one test (RED), then updating only enough code to pass it (GREEN). After each new test, the previous passing count is cited (e.g. '1 failed, 2 passed'), confirming one-test-at-a-time discipline throughout."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "baseline",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test for is_empty on a new stack appears before any Stack implementation",
+          "passed": true,
+          "evidence": "Transcript confirms all 9 tests were written in test_stack.py before stack.py was created. test_new_stack_is_empty (testing is_empty) is the first test in test_stack.py. Transcript step order: create test_stack.py \u2192 run pytest (fail: ImportError) \u2192 create stack.py \u2192 run pytest (9 pass)."
+        },
+        {
+          "text": "Tests cover all four methods: push, pop, peek, is_empty",
+          "passed": true,
+          "evidence": "test_stack.py covers all four: is_empty (test_new_stack_is_empty, test_push_makes_stack_non_empty), push (test_push_makes_stack_non_empty, test_push_multiple_pop_lifo_order), pop (test_pop_returns_top_element, test_pop_removes_element, test_pop_on_empty_stack_raises_index_error, test_push_multiple_pop_lifo_order), peek (test_peek_returns_top_element, test_peek_does_not_remove_element, test_peek_after_multiple_pushes)."
+        },
+        {
+          "text": "A test verifies that pop on an empty stack raises IndexError",
+          "passed": true,
+          "evidence": "test_pop_on_empty_stack_raises_index_error (test_stack.py lines 42-45) uses `pytest.raises(IndexError)` on an empty Stack. Test passes in the live run."
+        },
+        {
+          "text": "All tests pass with the final implementation",
+          "passed": true,
+          "evidence": "Live pytest run: 9 passed, 0 failed (exit code 0). Matches the transcript's reported final run output."
+        },
+        {
+          "text": "Tests were added one at a time \u2014 no large batches of tests written before the code caught up",
+          "passed": false,
+          "evidence": "Transcript explicitly states 'Write all tests first' and 'Created test_stack.py with all 9 tests' in a single step before any implementation existed. All 9 tests were written in one batch, then stack.py was written to make them all pass at once. This violates the Red\u2192Green one-test-at-a-time TDD rhythm."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test for the combined vip=True and code='SAVE10' case is written and confirmed to fail before any fix is applied",
+          "passed": true,
+          "evidence": "Transcript Step 1 shows test_vip_and_save10_code_discount_not_stacked written against the buggy implementation (two separate if blocks). The test run output explicitly shows: 'FAILED test_discount.py::test_vip_and_save10_code_discount_not_stacked - AssertionError: Expected 90.0 (10% off applied once), but got 81.0.' This failure is documented before any fix was applied."
+        },
+        {
+          "text": "The fix is minimal \u2014 only the double-discount logic is changed",
+          "passed": true,
+          "evidence": "The fix changed exactly two sequential `if` blocks into a single `if vip or code == 'SAVE10':` condition. The function signature, return value, rounding, and all other behaviour are unchanged. discount.py is 6 lines total \u2014 nothing unrelated was touched."
+        },
+        {
+          "text": "All tests pass after the fix",
+          "passed": true,
+          "evidence": "Both the transcript (Step 2) and the live test run confirm '5 passed in 0.01s': test_no_discount, test_vip_discount_only, test_save10_code_only, test_no_vip_wrong_code, and test_vip_and_save10_code_discount_not_stacked all PASSED."
+        },
+        {
+          "text": "No unrelated behaviour was changed alongside the fix",
+          "passed": true,
+          "evidence": "The final discount.py only modifies the conditional logic for applying the 10% discount (two ifs \u2192 one if/or). The function signature, docstring update (adding a clarification sentence), rounding, and return are all consistent with the original. The four pre-existing passing tests (no_discount, vip_only, save10_only, wrong_code) continue to pass, confirming no unrelated behaviour was altered."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "baseline",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test for the combined vip=True and code='SAVE10' case is written and confirmed to fail before any fix is applied",
+          "passed": true,
+          "evidence": "Transcript shows test_vip_and_code_only_one_discount was written first (step 2) and explicitly run against the buggy implementation, producing: 'FAILED test_discount.py::test_vip_and_code_only_one_discount \u2014 AssertionError: Expected 90.0 but got 81.0 (double discount bug)'. The test exists in test_discount.py at lines 17-20."
+        },
+        {
+          "text": "The fix is minimal \u2014 only the double-discount logic is changed",
+          "passed": true,
+          "evidence": "discount.py contains exactly one change: two independent if-statements (if vip: price*=0.9 / if code=='SAVE10': price*=0.9) were merged into a single 'if vip or code == \"SAVE10\":' guard. The rounding, return value, function signature, and docstring are all unmodified relative to the original structure."
+        },
+        {
+          "text": "All tests pass after the fix",
+          "passed": true,
+          "evidence": "pytest run confirmed: 5 passed in 0.01s \u2014 test_no_discount, test_vip_discount, test_code_discount, test_vip_and_code_only_one_discount, test_unrecognised_code all PASSED."
+        },
+        {
+          "text": "No unrelated behaviour was changed alongside the fix",
+          "passed": true,
+          "evidence": "The fix only collapsed two if-blocks into one with an 'or' condition \u2014 same discount rate (10%), same qualifying conditions (vip, SAVE10), same rounding. Tests for no-discount (100.0), vip-only (90.0), code-only (90.0), and unrecognised code (100.0) all continue to pass, confirming no unrelated behaviour was altered."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The first test is for an empty list returning 0",
+          "passed": true,
+          "evidence": "Cycle 1 RED step shows `def test_empty_list_returns_zero(): assert sum_list([]) == 0` as the very first test written."
+        },
+        {
+          "text": "The implementation for the empty-list test returns the constant 0, not a general loop",
+          "passed": true,
+          "evidence": "Cycle 1 GREEN step explicitly shows `def sum_list(lst): return 0` with the label 'Transformation: return a constant'. Test output confirms only 1 test passing at that point."
+        },
+        {
+          "text": "A second test for a single-element list forces a more general approach",
+          "passed": true,
+          "evidence": "Cycle 2 RED adds `test_single_element_returns_that_element` asserting `sum_list([5]) == 5`, which fails against the `return 0` stub. GREEN updates to `if not lst: return 0; return lst[0]`."
+        },
+        {
+          "text": "Iteration or equivalent is only introduced once a two-or-more-element test forces it",
+          "passed": true,
+          "evidence": "Cycle 3 RED adds `test_multiple_elements_returns_sum` asserting `sum_list([1,2,3]) == 6`. Only then does the GREEN step introduce the `for n in lst: total += n` loop. No loop appears before this point."
+        },
+        {
+          "text": "All tests pass with the final implementation",
+          "passed": true,
+          "evidence": "pytest run confirmed: 3 passed in 0.01s \u2014 test_empty_list_returns_zero, test_single_element_returns_that_element, test_multiple_elements_returns_sum all PASSED."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "baseline",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The first test is for an empty list returning 0",
+          "passed": true,
+          "evidence": "transcript step 1 and test_sum_list.py confirm test_empty_list() with assert sum_list([]) == 0 is the first test written."
+        },
+        {
+          "text": "The implementation for the empty-list test returns the constant 0, not a general loop",
+          "passed": false,
+          "evidence": "Transcript step 1 explicitly states: 'Implemented sum_list to return 0 for an empty list using an accumulator loop.' The full loop was introduced immediately, not a stub returning constant 0."
+        },
+        {
+          "text": "A second test for a single-element list forces a more general approach",
+          "passed": false,
+          "evidence": "Transcript step 2 states: 'The loop already handles this.' Since the general loop was present from step 1, the single-element test forced nothing \u2014 the existing implementation already passed it."
+        },
+        {
+          "text": "Iteration or equivalent is only introduced once a two-or-more-element test forces it",
+          "passed": false,
+          "evidence": "Iteration (accumulator loop) was introduced at step 1 for the empty-list test, long before any two-or-more-element test. The transcript confirms this order of events."
+        },
+        {
+          "text": "All tests pass with the final implementation",
+          "passed": true,
+          "evidence": "pytest run confirms 7 passed in 0.01s: test_empty_list, test_single_element, test_two_elements, test_multiple_elements, test_negative_numbers, test_mixed_positive_and_negative, test_zeros."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test list or plan is described before implementation starts",
+          "passed": true,
+          "evidence": "Step 0 \u2014 Test List enumerates 7 test cases (empty string, single char, simple palindrome, simple non-palindrome, mixed-case, spaces, punctuation) before any palindrome.py code is written."
+        },
+        {
+          "text": "Tests cover: empty string, single character, simple palindrome, simple non-palindrome, mixed-case palindrome, palindrome with spaces or punctuation",
+          "passed": true,
+          "evidence": "All six required categories are covered: test_empty_string, test_single_character, test_simple_palindrome, test_simple_non_palindrome, test_mixed_case_palindrome, test_palindrome_with_spaces, test_palindrome_with_punctuation \u2014 7 tests total in test_palindrome.py."
+        },
+        {
+          "text": "All tests pass with the final implementation",
+          "passed": true,
+          "evidence": "Running `python -m pytest test_palindrome.py -v` produces '7 passed in 0.01s' with all tests green."
+        },
+        {
+          "text": "The refactor phase removes any duplication introduced while making tests pass",
+          "passed": true,
+          "evidence": "The REFACTOR section correctly identifies no duplication in the final 2-line implementation. Normalization (filter + lowercase) and comparison are each done once; no redundant logic was introduced during the green phases, so no removal was needed."
+        },
+        {
+          "text": "The agent runs the test suite after each Red and Green phase",
+          "passed": true,
+          "evidence": "Test output is shown after every phase: RED 1 (ImportError), GREEN 1 (1 passed), RED 2 (2 passed \u2014 immediate pass noted), RED 3 (1 failed, 2 passed), GREEN 3 (3 passed), RED 4 (4 passed \u2014 immediate pass noted), RED 5 (1 failed, 4 passed), GREEN 5 (5 passed), RED 6 (1 failed, 5 passed), GREEN 6 (6 passed), RED 7 (7 passed \u2014 immediate pass noted). Every Red and Green phase transition includes explicit test runner output."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "baseline",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A test list or plan is described before implementation starts",
+          "passed": true,
+          "evidence": "The transcript's Approach section and Step 1 list all planned test cases (12 tests covering palindromes, case insensitivity, spaces, punctuation, empty string, single char, numeric, mixed alphanumeric) before palindrome.py is written in Step 3."
+        },
+        {
+          "text": "Tests cover: empty string, single character, simple palindrome, simple non-palindrome, mixed-case palindrome, palindrome with spaces or punctuation",
+          "passed": true,
+          "evidence": "test_empty_string, test_single_character, test_simple_palindrome, test_simple_non_palindrome, test_case_insensitive (Racecar), test_with_spaces (A man a plan...), and test_with_punctuation (Was it a car...) are all present in test_palindrome.py."
+        },
+        {
+          "text": "All tests pass with the final implementation",
+          "passed": true,
+          "evidence": "Running pytest confirmed 12 passed in 0.01s with exit code 0."
+        },
+        {
+          "text": "The refactor phase removes any duplication introduced while making tests pass",
+          "passed": false,
+          "evidence": "The transcript has no Refactor phase. It goes directly from Red (Step 2) to implementation (Step 3) to Green (Step 4). No refactoring step is described or evidenced, even though the implementation is concise and clean."
+        },
+        {
+          "text": "The agent runs the test suite after each Red and Green phase",
+          "passed": true,
+          "evidence": "Red phase (Step 2): pytest run produced 'ModuleNotFoundError: No module named palindrome'. Green phase (Step 4): pytest run showed '12 passed in 0.01s'. Both runs are documented in the transcript."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0,
+        "stddev": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "baseline": {
+      "pass_rate": {
+        "mean": 0.8,
+        "stddev": 0.2449,
+        "min": 0.4,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0,
+        "stddev": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.20",
+      "time_seconds": "+0.0",
+      "tokens": "+0"
+    }
+  },
+  "notes": [
+    "With-skill runs followed strict Red\u2192Green\u2192Refactor cycles with one test at a time",
+    "Baseline sum-of-list failed 3/5: skipped incremental transformations (returned loop on first test)",
+    "Baseline stack failed 1/5: wrote all tests before any implementation (batch not incremental)",
+    "Baseline palindrome failed 1/5: no explicit refactor phase documented"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "expectations": [
+    {
+      "text": "A test for the combined vip=True and code='SAVE10' case is written and confirmed to fail before any fix is applied",
+      "passed": true,
+      "evidence": "Transcript shows test_vip_and_code_only_one_discount was written first (step 2) and explicitly run against the buggy implementation, producing: 'FAILED test_discount.py::test_vip_and_code_only_one_discount — AssertionError: Expected 90.0 but got 81.0 (double discount bug)'. The test exists in test_discount.py at lines 17-20."
+    },
+    {
+      "text": "The fix is minimal — only the double-discount logic is changed",
+      "passed": true,
+      "evidence": "discount.py contains exactly one change: two independent if-statements (if vip: price*=0.9 / if code=='SAVE10': price*=0.9) were merged into a single 'if vip or code == \"SAVE10\":' guard. The rounding, return value, function signature, and docstring are all unmodified relative to the original structure."
+    },
+    {
+      "text": "All tests pass after the fix",
+      "passed": true,
+      "evidence": "pytest run confirmed: 5 passed in 0.01s — test_no_discount, test_vip_discount, test_code_discount, test_vip_and_code_only_one_discount, test_unrecognised_code all PASSED."
+    },
+    {
+      "text": "No unrelated behaviour was changed alongside the fix",
+      "passed": true,
+      "evidence": "The fix only collapsed two if-blocks into one with an 'or' condition — same discount rate (10%), same qualifying conditions (vip, SAVE10), same rounding. Tests for no-discount (100.0), vip-only (90.0), code-only (90.0), and unrecognised code (100.0) all continue to pass, confirming no unrelated behaviour was altered."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "claims": [],
+  "eval_feedback": {
+    "suggestions": [
+      "Consider having the agent explicitly show the test run output for the pre-fix failure in a structured/machine-readable way (e.g. captured pytest JSON output) rather than only in the prose transcript, to make grading more robust.",
+      "The transcript could be strengthened by showing the original discount.py file was committed/saved before the test run, making the 'test before fix' ordering unambiguous."
+    ],
+    "overall": "Excellent TDD execution. The agent correctly followed red-green cycle: wrote the failing test first, confirmed the failure (81.0 vs 90.0), applied a minimal one-line fix (or-condition), and verified all 5 tests pass. No extraneous changes were made."
+  }
+}
