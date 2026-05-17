@@ -24,7 +24,7 @@ A custom benchmarking agent (`benchmark/`) for measuring the time and token usag
 
 ### Benchmarking GitHub Copilot from the agent environment
 
-The `GITHUB_TOKEN` secret is available in the Copilot coding-agent environment and has GitHub Models access. Use it to benchmark prompts directly:
+The `GITHUB_TOKEN` secret is available in the Copilot coding-agent environment and has GitHub Copilot access. Use it to benchmark prompts directly:
 
 ```bash
 # Plain-text output (default)
